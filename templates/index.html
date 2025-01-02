@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoring Bola Voli</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col justify-center items-center">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h1 class="text-2xl font-bold text-center mb-4">Scoring Bola Voli</h1>
+        <div class="flex justify-between mb-4">
+            <div class="text-center">
+                <h2 class="text-lg font-semibold">Tim A</h2>
+                <p id="team_a_score" class="text-4xl font-bold text-blue-500">0</p>
+                <button onclick="updateScore('team_a')" 
+                        class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Tambah Poin</button>
+            </div>
+            <div class="text-center">
+                <h2 class="text-lg font-semibold">Tim B</h2>
+                <p id="team_b_score" class="text-4xl font-bold text-red-500">0</p>
+                <button onclick="updateScore('team_b')" 
+                        class="mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Tambah Poin</button>
+            </div>
+        </div>
+        <button onclick="resetScore()" 
+                class="w-full px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-800">
+            Reset Skor
+        </button>
+    </div>
+
+    <script>
+        async function updateScore(team) {
+            const response = await fetch("/update_score", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ team: team })
+            });
+            const data = await response.json();
+            document.getElementById("team_a_score").textContent = data.team_a;
+            document.getElementById("team_b_score").textContent = data.team_b;
+        }
+
+        async function resetScore() {
+            const response = await fetch("/reset_score", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            const data = await response.json();
+            document.getElementById("team_a_score").textContent = data.team_a;
+            document.getElementById("team_b_score").textContent = data.team_b;
+        }
+    </script>
+</body>
+</html>
