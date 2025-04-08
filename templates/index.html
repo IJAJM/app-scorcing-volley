@@ -3,52 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scoring Bola Voli</title>
+    <title>VollyScore - Filosofi Kerjasama Tim</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes pulse-energy {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .score-transition {
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col justify-center items-center">
-    <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-        <h1 class="text-2xl font-bold text-center mb-4">Scoring Bola Voli</h1>
-        <div class="flex justify-between mb-4">
-            <div class="text-center">
-                <h2 class="text-lg font-semibold">Tim A</h2>
-                <p id="team_a_score" class="text-4xl font-bold text-blue-500">0</p>
-                <button onclick="updateScore('team_a')" 
-                        class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Tambah Poin</button>
+<body class="bg-gradient-to-br from-slate-800 to-slate-900 min-h-screen flex flex-col justify-center items-center font-sans">
+    <!-- Header Filosofi -->
+    <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-white mb-2 animate-pulse">
+            🏐 VollyScore
+        </h1>
+        <p class="text-gray-300 italic">"Kemenangan Sejati Lahir dari Kerjasama Tim"</p>
+    </div>
+
+    <!-- Scoreboard dengan Konsep Jaring -->
+    <div class="relative bg-white/10 backdrop-blur-lg p-8 rounded-xl shadow-2xl border-2 border-white/20 w-full max-w-2xl">
+        <!-- Garis Jaring Voli -->
+        <div class="absolute inset-0 flex justify-center">
+            <div class="w-1 h-full bg-white/20"></div>
+        </div>
+
+        <div class="flex justify-between items-stretch gap-8">
+            <!-- Tim A -->
+            <div class="flex-1 text-center transform hover:scale-105 transition-all">
+                <div class="bg-blue-500/20 p-6 rounded-xl border-2 border-blue-400/30">
+                    <h2 class="text-xl font-semibold text-blue-300 mb-4 flex items-center justify-center gap-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                        TIM A
+                    </h2>
+                    <p id="team_a_score" class="text-6xl font-bold text-blue-400 mb-4 score-transition">0</p>
+                    <button onclick="updateScore('team_a')" 
+                            class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-lg transition-all 
+                                   hover:shadow-xl active:scale-95 flex items-center justify-center gap-2 w-full">
+                        ⚡ Tambah Energi
+                    </button>
+                </div>
             </div>
-            <div class="text-center">
-                <h2 class="text-lg font-semibold">Tim B</h2>
-                <p id="team_b_score" class="text-4xl font-bold text-red-500">0</p>
-                <button onclick="updateScore('team_b')" 
-                        class="mt-2 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Tambah Poin</button>
+
+            <!-- Tim B -->
+            <div class="flex-1 text-center transform hover:scale-105 transition-all">
+                <div class="bg-red-500/20 p-6 rounded-xl border-2 border-red-400/30">
+                    <h2 class="text-xl font-semibold text-red-300 mb-4 flex items-center justify-center gap-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                        TIM B
+                    </h2>
+                    <p id="team_b_score" class="text-6xl font-bold text-red-400 mb-4 score-transition">0</p>
+                    <button onclick="updateScore('team_b')" 
+                            class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg shadow-lg transition-all 
+                                   hover:shadow-xl active:scale-95 flex items-center justify-center gap-2 w-full">
+                        ⚡ Tambah Momentum
+                    </button>
+                </div>
             </div>
         </div>
-        <button onclick="resetScore()" 
-                class="w-full px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-800">
-            Reset Skor
-        </button>
+
+        <!-- Reset Button dengan Filosofi -->
+        <div class="mt-8 text-center">
+            <button onclick="resetScore()" 
+                    class="px-6 py-2 bg-amber-500/20 hover:bg-amber-600/30 text-amber-300 rounded-lg 
+                           border border-amber-400/30 transition-all hover:scale-105">
+                🔄 Reset Permainan
+                <span class="text-xs block text-amber-400/70 mt-1">"Setiap Babak Baru adalah Kesempatan Baru"</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Element Filosofi Bawah -->
+    <div class="mt-8 text-center text-sm text-gray-400 max-w-2xl">
+        <p class="italic">"Skor hanyalah angka, tetapi kerjasama tim adalah seni yang abadi"</p>
+        <div class="flex justify-center gap-4 mt-4">
+            <div class="p-2 rounded-full bg-white/5">
+                🏐 Sportivitas
+            </div>
+            <div class="p-2 rounded-full bg-white/5">
+                🤝 Kerjasama
+            </div>
+            <div class="p-2 rounded-full bg-white/5">
+                ⚡ Energi
+            </div>
+        </div>
     </div>
 
     <script>
         async function updateScore(team) {
+            const scoreElement = document.getElementById(`${team}_score`);
+            scoreElement.classList.add('animate-pulse-energy');
+            
             const response = await fetch("/update_score", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ team: team })
             });
+            
             const data = await response.json();
+            scoreElement.classList.remove('animate-pulse-energy');
             document.getElementById("team_a_score").textContent = data.team_a;
             document.getElementById("team_b_score").textContent = data.team_b;
+            
+            if(data.team_a >= 25 || data.team_b >= 25) {
+                setTimeout(() => {
+                    alert(data.team_a >= 25 ? "Tim A Menang! 🎉" : "Tim B Menang! 🎉");
+                }, 100);
+            }
         }
 
         async function resetScore() {
             const response = await fetch("/reset_score", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                }
+                headers: { "Content-Type": "application/json" }
             });
             const data = await response.json();
             document.getElementById("team_a_score").textContent = data.team_a;
